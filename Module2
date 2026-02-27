@@ -1,0 +1,53 @@
+// 2
+
+import java.util.Scanner;
+public class palindrome {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String original = sc.nextLine();
+        String reverse = "";
+        for (int i = original.len() - 1; i >= 0; i--) {
+            rev = rev + original.charAt(i);
+        }
+
+        if (original. =IgnoreCase(rev)) {
+            System.out.println(" palindrome");
+        } else {
+            System.out.println(" not a palindrome");
+        }
+    }
+}
+
+// 3
+public class methodover {
+    static void add(int a, int b) {
+        System.out.println("Sum of two: " + (a + b));
+    }
+    static void add(int a, int b, int c) {
+        System.out.println("Sum of three: " + (a + b + c));
+    }
+    public static void main(String[] args) {
+        add(5, 10);
+        add(5, 10, 15);
+    }
+}
+
+
+// 1
+public class fact{
+    // This is the recursive method
+    public static int calc(int n) {
+        if (n <= 1) {
+            return 1;
+        } else {
+            return n * calc(n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int num = 5;
+        int result = calc(num);
+        System.out.println("Factorial of " + num + " is: " + result);
+    }
+}
