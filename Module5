@@ -1,0 +1,95 @@
+// 1
+import java.io.*;
+
+public class ExceptionDemo {
+    public static void main(String[] args) {
+        int[] arr = {1, 2};
+        try {
+            FileReader file = new FileReader("test.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("Checked Exception: File was not found!");
+        }
+    }
+}
+
+// 2
+public class Division {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error:  cant divide by zero!");
+        } finally {
+            System.out.println(" 'finally'.");
+        }
+    }
+}
+
+// 3
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+public class AgeCheck {
+    static void checkAge(int age) throws InvalidAgeException {
+        if (age < 18) {
+            throw new InvalidAgeException("Access Denied: You must be 18+");
+        } else {
+            System.out.println("Access Granted!");
+        }
+    }
+}
+
+// 5
+class MyThread extends Thread {
+    public void run() { System.out.println("Thread class is running"); }
+}
+class MyRunnable implements Runnable {
+    public void run() { System.out.println("Runnable interface is running"); }
+}
+public class ThreadWays {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();
+
+        Thread t2 = new Thread(new MyRunnable());
+        t2.start();
+    }
+}
+
+// 6
+class Counter {
+    int count = 0;
+    synchronized void increment() {
+        count++;
+    }
+}
+public class SyncDemo {
+    public static void main(String[] args) throws Exception {
+        Counter c = new Counter();
+        Thread t1 = new Thread(() -> { for(int i=0; i<100; i++) (); });
+        Thread t2 = new Thread(() -> { for(int i=0; i<100; i++) t(); });
+        t1.start();
+        t2.start();
+        t1.join(); 
+        t2.join();
+        System.out.println("Final Count: " + c.count);
+    }
+}
+
+// 8
+public class ThreadLife {
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> {
+            try { Thread.sleep(500); } catch (Exception e) {}
+        });
+        System.out.println("State 1: " + t.getState()); 
+        t.start();
+        System.out.println("State 2: " + t.getState()); 
+        
+        try { Thread.sleep(100); } catch (Exception e) {}
+        System.out.println("State 3: " + t.getState()); 
+    }
+}
