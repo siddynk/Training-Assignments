@@ -1,0 +1,107 @@
+// 1
+abstract class Shape {
+    abstract void area(); 
+}
+class Circle extends Shape {
+    void area() {
+        System.out.println("Area of Circ: 3.14 * r * r");
+    }
+}
+class Rectangle extends Shape {
+    void area() {
+        System.out.println("Area of Rect: length * breadth");
+    }
+}
+public class AbstractDemo {
+    public static void main(String[] args) {
+        Shape c = new Circle();
+        Shape r = new Rectangle();
+        c.area();
+        r.area();
+    }
+}
+
+
+// 2
+interface Payment {
+    void pay(); 
+}
+class CreditCardPayment implements Payment {
+    public void pay() {
+        System.out.println("Paid by Credit Card.");
+    }
+}
+class UPIPayment implements Payment {
+    public void pay() {
+        System.out.println("Paid by UPI.");
+    }
+}
+public class InterfaceDemo {
+    public static void main(String[] args) {
+        Payment p1 = new CreditCardPayment();
+        Payment p2 = new UPIPayment();
+        p1.pay();
+        p2.pay();
+    }
+}
+
+// 3
+public class StringTest {
+    public static void main(String[] args) {
+        String s = "Hello";
+        s.concat(" World"); 
+        System.out.println("String stays: " + s);
+        StringBuilder sb = new StringBuilder("Hello");
+        sb.append(" World"); 
+        System.out.println("StringBuilder changes: " + sb);
+    }
+}
+
+
+
+// 4 
+public class StringTest {
+    public static void main(String[] args) {
+        String s = "Hello";
+        s.concat(" World"); 
+        System.out.println("String stays: " + s);
+        StringBuilder sb = new StringBuilder("Hello");
+        sb.append(" World"); 
+        System.out.println("StringBuilder changes: " + sb);
+    
+
+        StringBuilder rev = new StringBuilder("Java Programming");
+        System.out.println("Reversed: " + rev.reverse());
+    }
+}
+
+// 6
+class Counter {
+    static int count = 0; 
+    Counter() {
+        count++;
+    }
+    static void displayCount() {
+        System.out.println("Total objects created: " + count);
+    }
+}
+public class StaticDemo {
+    public static void main(String[] args) {
+        Counter c1 = new Counter();
+        Counter c2 = new Counter();
+        Counter.displayCount();
+    }
+}
+
+// 7
+public class GCDemo {
+    public void finalize() {
+        System.out.println("Object is being cleared by Garbage Collector!");
+    }
+    public static void main(String[] args) {
+        GCDemo obj1 = new GCDemo();
+        obj1 = null;
+        System.gc(); 
+        System.out.println("Garbage Collection requested.");
+    }
+}
