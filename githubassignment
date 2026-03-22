@@ -1,0 +1,224 @@
+// LeetCOde141
+package assignment4;
+
+import DSA.linear.linkedList.problem.reverseLinkedList.ListNode;
+public class Leetcode141 {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head, fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;          // move 1 step
+            fast = fast.next.next;     // move 2 steps
+
+            if (slow == fast) {
+                return true;           // cycle found
+            }
+        }
+
+        return false; // no cycle
+    }
+}
+// LeetCode150
+package assignment4;
+import java.util.*;
+public class Leetcode150 {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st = new Stack<>();
+
+        for(String s : tokens) {
+            if("+-*/".contains(s)) {
+                int b = st.pop();
+                int a = st.pop();
+                switch(s) {
+                    case "+": st.push(a+b); break;
+                    case "-": st.push(a-b); break;
+                    case "*": st.push(a*b); break;
+                    case "/": st.push(a/b); break;
+                }
+            } else {
+                st.push(Integer.parseInt(s));
+            }
+        }
+        return st.pop();
+    }
+}
+// LeetCode155
+package assignment4;
+import java.util.*;
+public class Leetcode155 {
+    Stack<Integer> stack = new Stack<>();
+    Stack<Integer> minStack = new Stack<>();
+
+    public void push(int val) {
+        stack.push(val);
+        if(minStack.isEmpty() || val <= minStack.peek())
+            minStack.push(val);
+    }
+
+    public void pop() {
+        if(stack.pop().equals(minStack.peek()))
+            minStack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+// LeetCOde19
+package assignment4;
+import DSA.linear.linkedList.problem.reverseLinkedList.ListNode;
+
+import java.util.*;
+public class Leetcode19 {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode fast = dummy, slow = dummy;
+
+        for(int i = 0; i <= n; i++) fast = fast.next;
+
+        while(fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+}
+// LeetCOde2
+package assignment4;
+import DSA.linear.linkedList.problem.reverseLinkedList.ListNode;
+
+import java.util.*;
+public class Leetcode2 {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        int carry = 0;
+
+        while(l1 != null || l2 != null || carry != 0) {
+            int sum = carry;
+            if(l1 != null) sum += l1.val;
+            if(l2 != null) sum += l2.val;
+
+            curr.next = new ListNode(sum % 10);
+            carry = sum / 10;
+
+            curr = curr.next;
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+        }
+        return dummy.next;
+    }
+}
+// LeetCode20
+package assignment4;
+import java.util.*;
+public class Leetcode20 {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+
+        for(char c : s.toCharArray()) {
+            if(c=='(' || c=='{' || c=='[') st.push(c);
+            else {
+                if(st.isEmpty()) return false;
+                char top = st.pop();
+                if((c==')' && top!='(') ||
+                        (c=='}' && top!='{') ||
+                        (c==']' && top!='[')) return false;
+            }
+        }
+        return st.isEmpty();
+    }
+}
+// LeetCode206
+package assignment4;
+import DSA.linear.linkedList.problem.reverseLinkedList.ListNode;
+
+import java.util.*;
+public class Leetcode206 {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode next = curr.next; // store next
+            curr.next = prev;          // reverse link
+            prev = curr;
+            curr = next;
+        }
+
+        return prev; // new head
+    }
+}
+// LeetCOed232
+package assignment4;
+import java.util.*;
+public class Leetcode232 {
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
+
+    public void push(int x) {
+        s1.push(x);
+    }
+
+    public int pop() {
+        peek();
+        return s2.pop();
+    }
+
+    public int peek() {
+        if(s2.isEmpty())
+            while(!s1.isEmpty())
+                s2.push(s1.pop());
+        return s2.peek();
+    }
+
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+}
+// LeetCode239
+package assignment4;
+import java.util.*;
+public class Leetcode239 {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Deque<Integer> dq = new ArrayDeque<>();
+        int[] res = new int[nums.length - k + 1];
+
+        for(int i = 0; i < nums.length; i++) {
+            while(!dq.isEmpty() && dq.peek() < i - k + 1)
+                dq.poll();
+
+            while(!dq.isEmpty() && nums[dq.peekLast()] < nums[i])
+                dq.pollLast();
+
+            dq.offer(i);
+
+            if(i >= k - 1)
+                res[i - k + 1] = nums[dq.peek()];
+        }
+        return res;
+    }
+}
+// LeetCode876
+package assignment4;
+import DSA.linear.linkedList.problem.reverseLinkedList.ListNode;
+
+import java.util.*;
+public class Leetcode876 {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
